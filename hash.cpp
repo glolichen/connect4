@@ -28,3 +28,15 @@ ull hash::get_hash(const bitboard::Position &board) {
 	}
 	return hash;
 }
+
+ull hash::get_mirror_hash(const bitboard::Position &board) {
+	ull hash = 0;
+	for (int i = 0; i < 6; i++) {
+		for (int j = 0; j < 7; j++) {
+			if (board.board[i][j] == -1)
+				continue;
+			hash ^= zhColors[i * 7 + (6 - j)][board.board[i][j]];
+		}
+	}
+	return hash;
+}

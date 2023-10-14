@@ -6,6 +6,7 @@
 namespace hash {
 	void init();
 	ull get_hash(const bitboard::Position &board);
+	ull get_mirror_hash(const bitboard::Position &board);
 }
 
 #endif

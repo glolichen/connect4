@@ -99,16 +99,24 @@ void search::pvs(int &result, bitboard::Position &board, int depth, int alpha, i
 	ull hash = hash::get_hash(board);
 	auto it = transposition.find(hash);
 	if (it != transposition.end()) {
-		bool contains = false;
-		for (size_t i = 0; i < moves.size(); i++) {
-			if (moves[i] == it->second.move) {
-				moves.erase(moves.begin() + i);
-				moves.insert(moves.begin(), it->second.move);
-				contains = true;
-				break;
-			}
+		// bool contains = false;
+		// for (size_t i = 0; i < moves.size(); i++) {
+		// 	if (moves[i] == it->second.move) {
+		// 		moves.erase(moves.begin() + i);
+		// 		moves.insert(moves.begin(), it->second.move);
+		// 		contains = true;
+		// 		break;
+		// 	}
+		// }
+		if (it->second.depth > depth && depth_from_start) {
+			result = it->second.eval * (board.turn ? -1 : 1);
+			return;
 		}
-		if (contains && it->second.depth > depth && depth_from_start) {
+	}
+	ull mirrorHash = hash::get_mirror_hash(board);
+	it = transposition.find(mirrorHash);
+	if (it != transposition.end()) {
+		if (it->second.depth > depth && depth_from_start) {
 			result = it->second.eval * (board.turn ? -1 : 1);
 			return;
 		}

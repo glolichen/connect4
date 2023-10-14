@@ -18,7 +18,7 @@ int main() {
 
 	// theres stuff in search.cpp for mutlithreaded search
 	// i haven't figured that out yet but thats from chess engine
-	bitboard::decode("7/7/1yy4/1rr4/1rr1y1/1ryyyr1 r");
+	bitboard::decode("7/7/2y4/1yr4/1rr4/1ryyyr1 r");
 	bitboard::print_board(bitboard::board);
 	auto result = search::search_unlimited(bitboard::board);
 
